@@ -1,9 +1,10 @@
 class Genre
+
 	attr :name, true
+	@@all = []
 
 	def initialize(name)
 		@name = name
-		@@all = []
 	end
 	
 	def self.all
