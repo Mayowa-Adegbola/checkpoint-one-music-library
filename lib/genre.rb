@@ -1,10 +1,11 @@
 class Genre
-
-	attr :name, true
+	extend Concerns::Findable
+	attr_reader :name, :songs
 	@@all = []
 
 	def initialize(name)
 		@name = name
+		@songs = []
 	end
 	
 	def self.all
@@ -25,4 +26,12 @@ class Genre
 		Genre.new(name).save
 		self
 	end
+
+	def add_song(song)
+		@songs.push(song) unless @songs.include?(song)
+	end
+
+	def artists
+    self.songs.collect{|s| s.artist}.uniq
+  end
 end
