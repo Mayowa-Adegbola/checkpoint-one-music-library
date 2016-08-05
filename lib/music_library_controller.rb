@@ -70,7 +70,7 @@ class MusicLibraryController
       artist_input = gets.strip
       if artist = Artist.find_by_name(artist_input)
         artist.songs.each do |s|
-        puts "#{s}"
+          puts "#{s}"
         end
       else
         puts "Invalid Artist!"
@@ -104,7 +104,7 @@ class MusicLibraryController
     puts "Songs in the Library"
     puts "-" * 70
     Song.all.each.with_index(1) do |s, i|
-    puts "#{i}. #{s}"
+      puts "#{i}. #{s}"
     end
     puts "-" * 70
   end
