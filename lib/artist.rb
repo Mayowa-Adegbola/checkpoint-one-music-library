@@ -8,10 +8,10 @@ class Artist
 		@name = name
 		@songs =[]
 	end
-	
+
 	def self.all
 		@@all
-	end	
+	end
 
 	def self.destroy_all
 		@@all = []
@@ -35,4 +35,8 @@ class Artist
 	def genres
 		self.songs.collect{|s| s.genre}.uniq
 	end
+
+	def to_s
+    "#{name}"
+  end
 end

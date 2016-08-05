@@ -9,10 +9,10 @@ class Song
 		self.artist = artist if artist
 		self.genre = genre if genre
 	end
-	
+
 	def self.all
 		@@all
-	end	
+	end
 
 	def self.destroy_all
 		@@all = []
@@ -50,5 +50,9 @@ class Song
   	artist = Artist.find_or_create_by_name(artist_name)
   	genre = Genre.find_or_create_by_name(genre_name)
   	Song.new(song_name, artist, genre).save
+  end
+
+  def to_s
+    "#{artist.name} - #{name} - #{genre.name}"
   end
 end

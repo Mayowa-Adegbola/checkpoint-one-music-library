@@ -5,11 +5,10 @@ class MusicImporter
 	end
 
 	def files
-		Dir.entries(@path)[2..-1]
+		Dir[File.join(@path, '*.mp3')].map { |filename| File.basename(filename) }
 	end
 
 	def import
 		files.each { |filename| Song.create_from_filename(filename) }
 	end
-
 end
