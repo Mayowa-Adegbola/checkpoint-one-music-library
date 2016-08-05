@@ -1,12 +1,15 @@
 class MusicLibraryController
-
   def initialize(path = "./db/mp3s")
     MusicImporter.new(path).import
   end
 
   def call
     input = ""
+    puts "-" * 70
+    puts "-" * 70
     puts "Welcome to Your Music Library!"
+    puts "-" * 70
+    puts "-" * 70
     while input != "exit"
       puts "Type \"list songs\" to view all songs"
       puts "Type \"list artists\" to view all artists"
@@ -42,41 +45,58 @@ class MusicLibraryController
   end
 
   def artists
+    puts "-" * 70
+    puts "Artists in the Library"
+    puts "-" * 70
     Artist.all.each.with_index(1) do |a, i|
       puts "#{i}. #{a}"
     end
+    puts "-" * 70
   end
 
   def genres
+    puts "-" * 70
+    puts "Genres in the Library"
+    puts "-" * 70
     Genre.all.each.with_index(1) do |g, i|
       puts "#{i}. #{g}"
     end
+    puts "-" * 70
   end
 
   def list_artist
     puts "What artist by name would you like to list songs for?"
-    artist_input = gets.strip
-    if artist = Artist.find_by_name(artist_input)
-      artist.songs.each do |s,i|
-        puts "#{i}. #{s}"
+    print ">"
+      artist_input = gets.strip
+      if artist = Artist.find_by_name(artist_input)
+        artist.songs.each do |s|
+        puts "#{s}"
+        end
+      else
+        puts "Invalid Artist!"
       end
-    end
-  end
+   end
 
   def list_genre
     puts "What genre by name would you like to list songs for?"
+    print ">"
     genre_input = gets.strip
     if genre = Genre.find_by_name(genre_input)
-      genre.songs.each do |s,i|
-        puts "#{i}. #{s}"
+      genre.songs.each do |s|
+       puts "#{s}"
       end
+    else
+        puts "Invalid Genre!"
     end
   end
 
   def play_song
     puts "What song number would you like to play?"
+    print ">"
     song_input = gets.strip
+    puts "-" * 70
     puts "Playing #{Song.all[song_input.to_i-1]}"
+    puts "-" * 70
   end
 
   def songs
