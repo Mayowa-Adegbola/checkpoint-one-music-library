@@ -5,7 +5,11 @@ class MusicLibraryController
 
   def call
     input = ""
+    puts "-" * 70
+    puts "-" * 70
     puts "Welcome to Your Music Library!"
+    puts "-" * 70
+    puts "-" * 70
     while input != "exit"
       puts "Type \"list songs\" to view all songs"
       puts "Type \"list artists\" to view all artists"
