@@ -14,18 +14,32 @@ class Song
 		@@all
 	end
 
-	def self.destroy_all
+  def self.destroy_all
 		@@all = []
 		@@all
 	end
 
-	def save
+def self.new_from_filename(file)
+    artist_name, song_name, genre_name = file.gsub(/.mp3/, '').split(' - ')
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    Song.new(song_name, artist, genre)
+  end
+
+  def self.create_from_filename(file)
+    artist_name, song_name, genre_name = file.gsub(/.mp3/, '').split(' - ')
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    Song.new(song_name, artist, genre).save
+  end
+
+  def self.create(name)
+    Song.new(name).save
+  end
+
+  def save
 		@@all.push(self)
 		self
-	end
-
-	def self.create(name)
-		Song.new(name).save
 	end
 
 	def artist= (artist)
@@ -37,20 +51,6 @@ class Song
 		@genre = genre
 		@genre.add_song(self)
 	end
-
-  def self.new_from_filename(file)
-  	artist_name, song_name, genre_name = file.gsub(/.mp3/, '').split(' - ')
-  	artist = Artist.find_or_create_by_name(artist_name)
-  	genre = Genre.find_or_create_by_name(genre_name)
-  	Song.new(song_name, artist, genre)
-  end
-
-  def self.create_from_filename(file)
-  	artist_name, song_name, genre_name = file.gsub(/.mp3/, '').split(' - ')
-  	artist = Artist.find_or_create_by_name(artist_name)
-  	genre = Genre.find_or_create_by_name(genre_name)
-  	Song.new(song_name, artist, genre).save
-  end
 
   def to_s
     "#{artist.name} - #{name} - #{genre.name}"

@@ -4,29 +4,94 @@ class MusicLibraryController
   end
 
   def call
-    input = ""
-    puts "-" * 70
-    puts "-" * 70
+    user_input = ""
+    add_borderline
     puts "Welcome to Your Music Library!"
-    puts "-" * 70
-    puts "-" * 70
-    while input != "exit"
-      puts "Type \"list songs\" to view all songs"
-      puts "Type \"list artists\" to view all artists"
-      puts "Type \"list genres\" to view songs' genres"
-      puts "Type \"play song\" to play a song"
-      puts "Type \"list artist\" to view a particular artist's song"
-      puts "Type \"list genre\" to view a particular genre's song"
-      puts "Type \"exit\" to leave the app"
-      puts ""
-      print ">"
-      input = gets.strip
-      commands(input)
+    add_borderline
+    while user_input != "exit"
+      display_help
+      user_input = gets.strip
+      display_commands(user_input)
     end
   end
 
-  def commands(input)
-    case input
+  def artists
+    add_borderline
+    puts "Artists in the Library"
+    add_borderline
+    Artist.all.each.with_index(1) do |a, i|
+      puts "#{i}. #{a}"
+    end
+    add_borderline
+  end
+
+  def genres
+    add_borderline
+    puts "Genres in the Library"
+    add_borderline
+    Genre.all.each.with_index(1) do |g, i|
+      puts "#{i}. #{g}"
+    end
+    add_borderline
+  end
+
+  def list_artist
+    puts "What artist by name would you like to list songs for?"
+    puts ""
+    print ">"
+      artist_input = gets.strip
+      if artist = Artist.find_by_name(artist_input)
+        add_borderline
+        puts "#{artist}'s Songs".capitalize
+        add_borderline
+        artist.songs.each do |s|
+          puts "#{s}"
+        end
+        add_borderline
+      else
+        puts "Invalid Artist!, Type \"list artists\" for a list of available artists"
+      end
+   end
+
+  def list_genre
+    puts "What genre by name would you like to list songs for?"
+    print ">"
+    genre_input = gets.strip
+    if genre = Genre.find_by_name(genre_input)
+      add_borderline
+      puts "#{genre} Songs".capitalize
+      add_borderline
+      genre.songs.each do |s|
+       puts "#{s}"
+      end
+      add_borderline
+    else
+        puts "Invalid Genre!, Type \"list genres\" for a list of available genres"
+    end
+  end
+
+  def play_song
+    puts "What song number would you like to play?"
+    print ">"
+    song_input = gets.strip
+    add_borderline
+    puts "Playing #{Song.all[song_input.to_i-1]}"
+    add_borderline
+  end
+
+  def songs
+    add_borderline
+    puts "Songs in the Library"
+    add_borderline
+    Song.all.each.with_index(1) do |s, i|
+      puts "#{i}. #{s}"
+    end
+    add_borderline
+  end
+end
+
+def display_commands(user_input)
+    case user_input
       when "list songs"
         songs
       when "list artists"
@@ -40,72 +105,23 @@ class MusicLibraryController
       when "play song"
         play_song
       else
-      puts "Please Input a Valid Entry"
+        puts "Please Input a Valid Entry"
       end
   end
 
-  def artists
-    puts "-" * 70
-    puts "Artists in the Library"
-    puts "-" * 70
-    Artist.all.each.with_index(1) do |a, i|
-      puts "#{i}. #{a}"
-    end
-    puts "-" * 70
-  end
+def display_help
+  puts "Enter \"list songs\" to view all songs"
+  puts "Enter \"list artists\" to view all artists"
+  puts "Enter \"list genres\" to view songs' genres"
+  puts "Enter \"play song\" to play a song"
+  puts "Enter \"list artist\" to view a particular artist's song"
+  puts "Enter \"list genre\" to view a particular genre's song"
+  puts "Enter \"exit\" to leave the app"
+  puts ""
+  print ">"
+end
 
-  def genres
-    puts "-" * 70
-    puts "Genres in the Library"
-    puts "-" * 70
-    Genre.all.each.with_index(1) do |g, i|
-      puts "#{i}. #{g}"
-    end
-    puts "-" * 70
-  end
-
-  def list_artist
-    puts "What artist by name would you like to list songs for?"
-    print ">"
-      artist_input = gets.strip
-      if artist = Artist.find_by_name(artist_input)
-        artist.songs.each do |s|
-          puts "#{s}"
-        end
-      else
-        puts "Invalid Artist!"
-      end
-   end
-
-  def list_genre
-    puts "What genre by name would you like to list songs for?"
-    print ">"
-    genre_input = gets.strip
-    if genre = Genre.find_by_name(genre_input)
-      genre.songs.each do |s|
-       puts "#{s}"
-      end
-    else
-        puts "Invalid Genre!"
-    end
-  end
-
-  def play_song
-    puts "What song number would you like to play?"
-    print ">"
-    song_input = gets.strip
-    puts "-" * 70
-    puts "Playing #{Song.all[song_input.to_i-1]}"
-    puts "-" * 70
-  end
-
-  def songs
-    puts "-" * 70
-    puts "Songs in the Library"
-    puts "-" * 70
-    Song.all.each.with_index(1) do |s, i|
-      puts "#{i}. #{s}"
-    end
-    puts "-" * 70
-  end
+def add_borderline
+  puts "-" * 70
+  puts "-" * 70
 end
