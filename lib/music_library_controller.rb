@@ -72,6 +72,7 @@ class MusicLibraryController
 
   def play_song
     puts "What song number would you like to play?"
+
     print ">"
     song_input = gets.strip
     add_borderline
@@ -110,13 +111,15 @@ def display_commands(user_input)
   end
 
 def display_help
-  puts "Enter \"list songs\" to view all songs"
-  puts "Enter \"list artists\" to view all artists"
-  puts "Enter \"list genres\" to view songs' genres"
-  puts "Enter \"play song\" to play a song"
-  puts "Enter \"list artist\" to view a particular artist's song"
-  puts "Enter \"list genre\" to view a particular genre's song"
-  puts "Enter \"exit\" to leave the app"
+  puts "Please enter:"
+  puts ""
+  puts "\"list songs\" to view all songs"
+  puts "\"list artists\" to view all artists"
+  puts "\"list genres\" to view songs' genres"
+  puts "\"play song\" to play a song"
+  puts "\"list artist\" to view a particular artist's song"
+  puts "\"list genre\" to view a particular genre's song"
+  puts "\"exit\" to leave the app"
   puts ""
   print ">"
 end
