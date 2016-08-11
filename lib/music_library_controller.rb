@@ -10,8 +10,17 @@ class MusicLibraryController
     add_borderline
     while user_input != "exit"
       display_help
+      print ">"
       user_input = gets.strip
-      display_commands(user_input)
+      process_input(user_input)
+    end
+  end
+
+  def process_input(user_input)
+    if commands[user_input]
+      send(commands[user_input])
+    else
+      puts "Invalid Entry!"
     end
   end
 
@@ -51,7 +60,7 @@ class MusicLibraryController
       else
         puts "Invalid Artist!, Type \"list artists\" for a list of available artists"
       end
-   end
+  end
 
   def list_genre
     puts "What genre by name would you like to list songs for?"
@@ -72,12 +81,15 @@ class MusicLibraryController
 
   def play_song
     puts "What song number would you like to play?"
-
     print ">"
     song_input = gets.strip
-    add_borderline
-    puts "Playing #{Song.all[song_input.to_i-1]}"
-    add_borderline
+    if song = Song.all[song_input.to_i-1]
+      add_borderline
+      puts "Playing #{Song.all[song_input.to_i-1]}"
+      add_borderline
+    else
+      puts "Invalid Song!, Type \"list songs\" for a list of available songs"
+    end
   end
 
   def songs
@@ -89,42 +101,32 @@ class MusicLibraryController
     end
     add_borderline
   end
-end
 
-def display_commands(user_input)
-    case user_input
-      when "list songs"
-        songs
-      when "list artists"
-        artists
-      when "list genres"
-        genres
-      when "list artist"
-        list_artist
-      when "list genre"
-        list_genre
-      when "play song"
-        play_song
-      else
-        puts "Please Input a Valid Entry"
-      end
+  def commands
+  {"list songs" => :songs,
+    "list artists" => :artists,
+    "list genres" => :genres,
+    "play song" => :play_song,
+    "list artist" => :list_artist,
+    "list genre" => :list_genre,
+  }
   end
 
-def display_help
-  puts "Please enter:"
-  puts ""
-  puts "\"list songs\" to view all songs"
-  puts "\"list artists\" to view all artists"
-  puts "\"list genres\" to view songs' genres"
-  puts "\"play song\" to play a song"
-  puts "\"list artist\" to view a particular artist's song"
-  puts "\"list genre\" to view a particular genre's song"
-  puts "\"exit\" to leave the app"
-  puts ""
-  print ">"
-end
+  def display_help
+    puts <<-HELP_MENU
+      Please Enter:
+      "list songs" to view all songs
+      "list artists" to view all artists
+      "list genres" to view songs\s genres
+      "play song" to play a song
+      "list artist" to view a particular artist\'s song
+      "list genre" to view a particular genre\'s song
+      "exit" to leave the app
+    HELP_MENU
+  end
 
-def add_borderline
-  puts "-" * 70
-  puts "-" * 70
+  def add_borderline
+    puts "-" * 70
+    puts "-" * 70
+  end
 end
