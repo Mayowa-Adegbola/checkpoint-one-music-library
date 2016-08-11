@@ -10,8 +10,17 @@ class MusicLibraryController
     add_borderline
     while user_input != "exit"
       display_help
+      print ">"
       user_input = gets.strip
-      display_commands(user_input)
+      process_input(user_input)
+    end
+  end
+
+  def process_input(user_input)
+    if commands[user_input]
+      send(commands[user_input])
+    else
+      puts "Invalid Entry!"
     end
   end
 
@@ -51,7 +60,7 @@ class MusicLibraryController
       else
         puts "Invalid Artist!, Type \"list artists\" for a list of available artists"
       end
-   end
+  end
 
   def list_genre
     puts "What genre by name would you like to list songs for?"
@@ -93,30 +102,19 @@ class MusicLibraryController
     add_borderline
   end
 
-
-  def display_commands(user_input)
-    case user_input
-      when "list songs"
-        songs
-      when "list artists"
-        artists
-      when "list genres"
-        genres
-      when "list artist"
-        list_artist
-      when "list genre"
-        list_genre
-      when "play song"
-        play_song
-      else
-        puts "Please Input a Valid Entry"
-    end
+  def commands
+  {"list songs" => :songs,
+    "list artists" => :artists,
+    "list genres" => :genres,
+    "play song" => :play_song,
+    "list artist" => :list_artist,
+    "list genre" => :list_genre,
+  }
   end
 
   def display_help
     puts <<-HELP_MENU
-      Please enter:
-
+      Please Enter:
       "list songs" to view all songs
       "list artists" to view all artists
       "list genres" to view songs\s genres
