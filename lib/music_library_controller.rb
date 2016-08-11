@@ -39,7 +39,17 @@ class MusicLibraryController
     puts "Genres in the Library"
     add_borderline
     Genre.all.each.with_index(1) do |g, i|
-      puts "#{i}. #{g}"
+      puts "#{g}"
+    end
+    add_borderline
+  end
+
+  def songs
+    add_borderline
+    puts "Songs in the Library"
+    add_borderline
+    Song.all.each do |s|
+      puts "#{s}"
     end
     add_borderline
   end
@@ -60,20 +70,6 @@ class MusicLibraryController
     list(genre)
   end
 
-
-  def list(category)
-    if category
-      puts "#{category}'s Songs".capitalize
-        add_borderline
-      category.songs.each do |s|
-          puts "#{s}"
-      end
-      add_borderline
-    else
-      puts "Invalid selection! Enter a correct entry"
-    end
-  end
-
   def play_song
     puts "What song number would you like to play?"
     print ">"
@@ -87,14 +83,17 @@ class MusicLibraryController
     end
   end
 
-  def songs
-    add_borderline
-    puts "Songs in the Library"
-    add_borderline
-    Song.all.each.with_index(1) do |s, i|
-      puts "#{i}. #{s}"
+  def list(category)
+    if category
+      puts "#{category}'s Songs".capitalize
+        add_borderline
+      category.songs.each do |s|
+          puts "#{s}"
+      end
+      add_borderline
+    else
+      puts "Invalid selection! Enter a correct entry"
     end
-    add_borderline
   end
 
   def commands
@@ -124,4 +123,6 @@ class MusicLibraryController
     puts "-" * 70
     puts "-" * 70
   end
+
+
 end
