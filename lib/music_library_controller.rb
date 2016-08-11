@@ -72,12 +72,15 @@ class MusicLibraryController
 
   def play_song
     puts "What song number would you like to play?"
-
     print ">"
     song_input = gets.strip
-    add_borderline
-    puts "Playing #{Song.all[song_input.to_i-1]}"
-    add_borderline
+    if song = Song.all[song_input.to_i-1]
+      add_borderline
+      puts "Playing #{Song.all[song_input.to_i-1]}"
+      add_borderline
+    else
+      puts "Invalid Song!, Type \"list songs\" for a list of available songs"
+    end
   end
 
   def songs
@@ -89,9 +92,9 @@ class MusicLibraryController
     end
     add_borderline
   end
-end
 
-def display_commands(user_input)
+
+  def display_commands(user_input)
     case user_input
       when "list songs"
         songs
@@ -107,24 +110,25 @@ def display_commands(user_input)
         play_song
       else
         puts "Please Input a Valid Entry"
-      end
+    end
   end
 
-def display_help
-  puts "Please enter:"
-  puts ""
-  puts "\"list songs\" to view all songs"
-  puts "\"list artists\" to view all artists"
-  puts "\"list genres\" to view songs' genres"
-  puts "\"play song\" to play a song"
-  puts "\"list artist\" to view a particular artist's song"
-  puts "\"list genre\" to view a particular genre's song"
-  puts "\"exit\" to leave the app"
-  puts ""
-  print ">"
-end
+  def display_help
+    puts <<-HELP_MENU
+      Please enter:
 
-def add_borderline
-  puts "-" * 70
-  puts "-" * 70
+      "list songs" to view all songs
+      "list artists" to view all artists
+      "list genres" to view songs\s genres
+      "play song" to play a song
+      "list artist" to view a particular artist\'s song
+      "list genre" to view a particular genre\'s song
+      "exit" to leave the app
+    HELP_MENU
+  end
+
+  def add_borderline
+    puts "-" * 70
+    puts "-" * 70
+  end
 end

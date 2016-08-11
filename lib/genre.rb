@@ -17,13 +17,13 @@ class Genre
 		@@all
 	end
 
-	def save
-		@@all.push(self)
-		self
+	def self.create(name)
+		new(name).save
 	end
 
-	def self.create(name)
-		Genre.new(name).save
+	def save
+		@@all << self
+		self
 	end
 
 	def add_song(song)
