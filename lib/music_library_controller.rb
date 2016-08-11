@@ -38,7 +38,7 @@ class MusicLibraryController
     add_borderline
     puts "Genres in the Library"
     add_borderline
-    Genre.all.each.with_index(1) do |g, i|
+    Genre.all.each.with_index(1) do |g|
       puts "#{g}"
     end
     add_borderline
@@ -73,24 +73,15 @@ class MusicLibraryController
   def play_song
     puts "What song number would you like to play?"
     print ">"
-    song_input = gets.strip
-    if song = Song.all[song_input.to_i-1]
-      add_borderline
-      puts "Playing #{Song.all[song_input.to_i-1]}"
-      add_borderline
+    song_input = gets.strip.to_i
+    if song_input > 1 || song_input < Song.all.size
+      song = Song.all[song_input.to_i-1]
+        add_borderline
+        puts "Playing #{Song.all[song_input.to_i-1]}"
+        add_borderline
     else
       puts "Invalid Song!, Type \"list songs\" for a list of available songs"
     end
-  end
-
-  def list_specific(category)
-    add_borderline
-    puts "Artists in the Library"
-    add_borderline
-    Artist.all.each.with_index(1) do |a, i|
-      puts "#{i}. #{a}"
-    end
-    add_borderline
   end
 
   def list(category)
@@ -133,6 +124,4 @@ class MusicLibraryController
     puts "-" * 70
     puts "-" * 70
   end
-
-
 end
