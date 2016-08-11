@@ -28,8 +28,8 @@ class MusicLibraryController
     add_borderline
     puts "Artists in the Library"
     add_borderline
-    Artist.all.each.with_index(1) do |a, i|
-      puts "#{i}. #{a}"
+    Artist.all.each do |i|
+      puts "#{i}"
     end
     add_borderline
   end
@@ -48,8 +48,8 @@ class MusicLibraryController
     add_borderline
     puts "Songs in the Library"
     add_borderline
-    Song.all.each do |s|
-      puts "#{s}"
+    Song.all.each.with_index(1) do |s, i|
+      puts "#{i}. #{s}"
     end
     add_borderline
   end
@@ -81,6 +81,16 @@ class MusicLibraryController
     else
       puts "Invalid Song!, Type \"list songs\" for a list of available songs"
     end
+  end
+
+  def list_specific(category)
+    add_borderline
+    puts "Artists in the Library"
+    add_borderline
+    Artist.all.each.with_index(1) do |a, i|
+      puts "#{i}. #{a}"
+    end
+    add_borderline
   end
 
   def list(category)
