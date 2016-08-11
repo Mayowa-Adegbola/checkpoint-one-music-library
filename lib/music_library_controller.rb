@@ -46,36 +46,31 @@ class MusicLibraryController
 
   def list_artist
     puts "What artist by name would you like to list songs for?"
-    puts ""
     print ">"
-      artist_input = gets.strip
-      if artist = Artist.find_by_name(artist_input)
-        add_borderline
-        puts "#{artist}'s Songs".capitalize
-        add_borderline
-        artist.songs.each do |s|
-          puts "#{s}"
-        end
-        add_borderline
-      else
-        puts "Invalid Artist!, Type \"list artists\" for a list of available artists"
-      end
+    artist_input = gets.strip
+    artist = Artist.find_by_name(artist_input)
+    list(artist)
   end
 
   def list_genre
     puts "What genre by name would you like to list songs for?"
     print ">"
     genre_input = gets.strip
-    if genre = Genre.find_by_name(genre_input)
-      add_borderline
-      puts "#{genre} Songs".capitalize
-      add_borderline
-      genre.songs.each do |s|
-       puts "#{s}"
+    genre = Genre.find_by_name(genre_input)
+    list(genre)
+  end
+
+
+  def list(category)
+    if category
+      puts "#{category}'s Songs".capitalize
+        add_borderline
+      category.songs.each do |s|
+          puts "#{s}"
       end
       add_borderline
     else
-        puts "Invalid Genre!, Type \"list genres\" for a list of available genres"
+      puts "Invalid selection! Enter a correct entry"
     end
   end
 
