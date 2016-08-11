@@ -28,8 +28,8 @@ class MusicLibraryController
     add_borderline
     puts "Artists in the Library"
     add_borderline
-    Artist.all.each.with_index(1) do |a, i|
-      puts "#{i}. #{a}"
+    Artist.all.each do |i|
+      puts "#{i}"
     end
     add_borderline
   end
@@ -38,58 +38,10 @@ class MusicLibraryController
     add_borderline
     puts "Genres in the Library"
     add_borderline
-    Genre.all.each.with_index(1) do |g, i|
-      puts "#{i}. #{g}"
+    Genre.all.each.with_index(1) do |g|
+      puts "#{g}"
     end
     add_borderline
-  end
-
-  def list_artist
-    puts "What artist by name would you like to list songs for?"
-    puts ""
-    print ">"
-      artist_input = gets.strip
-      if artist = Artist.find_by_name(artist_input)
-        add_borderline
-        puts "#{artist}'s Songs".capitalize
-        add_borderline
-        artist.songs.each do |s|
-          puts "#{s}"
-        end
-        add_borderline
-      else
-        puts "Invalid Artist!, Type \"list artists\" for a list of available artists"
-      end
-  end
-
-  def list_genre
-    puts "What genre by name would you like to list songs for?"
-    print ">"
-    genre_input = gets.strip
-    if genre = Genre.find_by_name(genre_input)
-      add_borderline
-      puts "#{genre} Songs".capitalize
-      add_borderline
-      genre.songs.each do |s|
-       puts "#{s}"
-      end
-      add_borderline
-    else
-        puts "Invalid Genre!, Type \"list genres\" for a list of available genres"
-    end
-  end
-
-  def play_song
-    puts "What song number would you like to play?"
-    print ">"
-    song_input = gets.strip
-    if song = Song.all[song_input.to_i-1]
-      add_borderline
-      puts "Playing #{Song.all[song_input.to_i-1]}"
-      add_borderline
-    else
-      puts "Invalid Song!, Type \"list songs\" for a list of available songs"
-    end
   end
 
   def songs
@@ -100,6 +52,49 @@ class MusicLibraryController
       puts "#{i}. #{s}"
     end
     add_borderline
+  end
+
+  def list_artist
+    puts "What artist by name would you like to list songs for?"
+    print ">"
+    artist_input = gets.strip
+    artist = Artist.find_by_name(artist_input)
+    list(artist)
+  end
+
+  def list_genre
+    puts "What genre by name would you like to list songs for?"
+    print ">"
+    genre_input = gets.strip
+    genre = Genre.find_by_name(genre_input)
+    list(genre)
+  end
+
+  def play_song
+    puts "What song number would you like to play?"
+    print ">"
+    song_input = gets.strip.to_i
+    if song_input > 1 || song_input < Song.all.size
+      song = Song.all[song_input.to_i-1]
+        add_borderline
+        puts "Playing #{Song.all[song_input.to_i-1]}"
+        add_borderline
+    else
+      puts "Invalid Song!, Type \"list songs\" for a list of available songs"
+    end
+  end
+
+  def list(category)
+    if category
+      puts "#{category}'s Songs".capitalize
+        add_borderline
+      category.songs.each do |s|
+          puts "#{s}"
+      end
+      add_borderline
+    else
+      puts "Invalid selection! Enter a correct entry"
+    end
   end
 
   def commands
