@@ -21,7 +21,7 @@ class Genre
 	end
 
 	def save
-		@@all << self
+		@@all.push(self)
 		self
 	end
 
