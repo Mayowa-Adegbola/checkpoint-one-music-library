@@ -1,23 +1,23 @@
 class Song
-	extend Concerns::Findable
-	attr_accessor :name
-	attr_reader :artist, :genre
+  extend Concerns::Findable
+  attr_accessor :name
+  attr_reader :artist, :genre
 
-	@@all = []
+  @@all = []
 
-	def initialize(name, artist = nil, genre = nil)
-		@name = name
-		self.artist = artist if artist
-		self.genre = genre if genre
-	end
+  def initialize(name, artist = nil, genre = nil)
+    @name = name
+    self.artist = artist if artist
+    self.genre = genre if genre
+  end
 
-	def self.all
-		@@all
-	end
+  def self.all
+    @@all
+  end
 
   def self.destroy_all
-		@@all = []
-	end
+    @@all = []
+  end
 
   def self.new_from_filename(file)
     artist_name, song_name, genre_name = file.gsub(/.mp3/, '').split(' - ')
@@ -38,19 +38,19 @@ class Song
   end
 
   def save
-		@@all << self
+    @@all << self
     self
-	end
+  end
 
-	def artist= (artist)
-		@artist = artist
-		@artist.add_song(self)
-	end
+  def artist= (artist)
+    @artist = artist
+    @artist.add_song(self)
+  end
 
-	def genre= (genre)
-		@genre = genre
-		@genre.add_song(self)
-	end
+  def genre= (genre)
+    @genre = genre
+    @genre.add_song(self)
+  end
 
   def to_s
     "#{artist.name} - #{name} - #{genre.name}"
