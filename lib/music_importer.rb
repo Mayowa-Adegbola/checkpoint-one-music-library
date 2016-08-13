@@ -6,7 +6,7 @@ class MusicImporter
 	end
 
 	def files
-		Dir[File.join(@path, '*mp3')].map { |filename| File.basename(filename) }
+		Dir[File.join(@path, '*.mp3')].map { |filename| File.basename(filename) }
 	end
 
 	def import

@@ -23,7 +23,7 @@ class Artist
 	end
 
 	def save
-		@@all.push(self)
+		@@all << self
 		self
 	end
 
