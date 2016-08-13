@@ -75,9 +75,9 @@ class MusicLibraryController
     print ">"
     song_input = gets.strip.to_i
     if song_input > 1 || song_input < Song.all.size
-        add_borderline
-        puts "Playing #{Song.all[song_input.to_i-1]}"
-        add_borderline
+      add_borderline
+      puts "Playing #{Song.all[song_input.to_i-1]}"
+      add_borderline
     else
       puts "Invalid Song!, Type \"list songs\" for a list of available songs"
     end
@@ -88,7 +88,7 @@ class MusicLibraryController
       puts "#{category}'s Songs".capitalize
         add_borderline
       category.songs.each do |s|
-          puts "#{s}"
+        puts "#{s}"
       end
       add_borderline
     else
@@ -97,25 +97,26 @@ class MusicLibraryController
   end
 
   def commands
-  {"list songs" => :songs,
-    "list artists" => :artists,
-    "list genres" => :genres,
-    "play song" => :play_song,
-    "list artist" => :list_artist,
-    "list genre" => :list_genre,
-  }
+    {
+      "list songs" => :songs,
+      "list artists" => :artists,
+      "list genres" => :genres,
+      "play song" => :play_song,
+      "list artist" => :list_artist,
+      "list genre" => :list_genre,
+    }
   end
 
   def display_help
     puts <<-HELP_MENU
-      Please Enter:
-      "list songs" to view all songs
-      "list artists" to view all artists
-      "list genres" to view songs\s genres
-      "play song" to play a song
-      "list artist" to view a particular artist\'s song
-      "list genre" to view a particular genre\'s song
-      "exit" to leave the app
+    Please Enter:
+    "list songs" to view all songs
+    "list artists" to view all artists
+    "list genres" to view songs\s genres
+    "play song" to play a song
+    "list artist" to view a particular artist\'s song
+    "list genre" to view a particular genre\'s song
+    "exit" to leave the app
     HELP_MENU
   end
 
