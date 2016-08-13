@@ -75,7 +75,6 @@ class MusicLibraryController
     print ">"
     song_input = gets.strip.to_i
     if song_input > 1 || song_input < Song.all.size
-      song = Song.all[song_input.to_i-1]
         add_borderline
         puts "Playing #{Song.all[song_input.to_i-1]}"
         add_borderline
