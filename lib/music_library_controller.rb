@@ -92,7 +92,7 @@ class MusicLibraryController
       end
       add_borderline
     else
-      puts "Invalid selection! Enter a correct entry"
+      puts "Invalid selection! Check the list of available commands"
     end
   end
 
