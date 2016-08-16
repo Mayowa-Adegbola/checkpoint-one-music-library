@@ -6,12 +6,12 @@ class MusicLibraryController
   def call
     user_input = ""
     add_borderline
-    puts "Welcome to Your Music Library!"
+    puts "Welcome to Your Music Library!".colorize(:green)
     add_borderline
     while user_input != "exit"
       display_help
       print ">"
-      user_input = gets.strip
+      user_input = gets.strip.downcase
       process_input(user_input)
     end
   end
@@ -20,13 +20,13 @@ class MusicLibraryController
     if commands[user_input]
       send(commands[user_input])
     else
-      puts "Invalid Entry!"
+      puts "Invalid Input! Check that you have entered the right command".colorize(:red)
     end
   end
 
   def artists
     add_borderline
-    puts "Artists in the Library"
+    puts "Artists in the Library".colorize(:blue)
     add_borderline
     Artist.all.each do |i|
       puts "#{i}"
@@ -36,7 +36,7 @@ class MusicLibraryController
 
   def genres
     add_borderline
-    puts "Genres in the Library"
+    puts "Genres in the Library".colorize(:blue)
     add_borderline
     Genre.all.each.with_index(1) do |g|
       puts "#{g}"
@@ -46,7 +46,7 @@ class MusicLibraryController
 
   def songs
     add_borderline
-    puts "Songs in the Library"
+    puts "Songs in the Library".colorize(:blue)
     add_borderline
     Song.all.each.with_index(1) do |s, i|
       puts "#{i}. #{s}"
@@ -55,7 +55,7 @@ class MusicLibraryController
   end
 
   def list_artist
-    puts "What artist by name would you like to list songs for?"
+    puts "What artist by name would you like to list songs for?".colorize(:blue)
     print ">"
     artist_input = gets.strip
     artist = Artist.find_by_name(artist_input)
@@ -63,36 +63,34 @@ class MusicLibraryController
   end
 
   def list_genre
-    puts "What genre by name would you like to list songs for?"
+    puts "What genre by name would you like to list songs for?".colorize(:blue)
     print ">"
-    genre_input = gets.strip
+    genre_input = gets.strip.downcase
     genre = Genre.find_by_name(genre_input)
     list(genre)
   end
+
 
   def play_song
     puts "What song number would you like to play?"
     print ">"
     song_input = gets.strip.to_i
-    if song_input > 1 || song_input < Song.all.size
-      add_borderline
+    if song_input > 0 && song_input <= Song.all.size
       puts "Playing #{Song.all[song_input.to_i-1]}"
-      add_borderline
     else
       puts "Invalid Song!, Type \"list songs\" for a list of available songs"
     end
   end
 
+
   def list(category)
     if category
-      puts "#{category}'s Songs".capitalize
-        add_borderline
+      puts "#{category} Songs".capitalize
       category.songs.each do |s|
         puts "#{s}"
       end
-      add_borderline
     else
-      puts "Invalid selection! Check the list of available commands"
+      puts "Invalid selection! Check the list of available commands".colorize(:red)
     end
   end
 
@@ -112,7 +110,7 @@ class MusicLibraryController
     Please Enter:
     "list songs" to view all songs
     "list artists" to view all artists
-    "list genres" to view songs\s genres
+    "list genres" to view songs\'s genres
     "play song" to play a song
     "list artist" to view a particular artist\'s song
     "list genre" to view a particular genre\'s song
@@ -121,7 +119,7 @@ class MusicLibraryController
   end
 
   def add_borderline
-    puts "-" * 70
-    puts "-" * 70
+    puts "-".colorize(:red) * 70
+    puts "-".colorize(:red) * 70
   end
 end
