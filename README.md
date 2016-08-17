@@ -59,6 +59,6 @@ You will require a basic understanding of "Git" and the "Command Line Interface"
 
     $  bin/musiclibrary
 
--> The help menu is displayed at startup as shown below.
+-> The help menu is displayed at startup.
    It shows you the relevant commands/actions you can perform in the application.
    Follow the interactive prompts
