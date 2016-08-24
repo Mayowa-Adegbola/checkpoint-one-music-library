@@ -1,7 +1,7 @@
 <a href="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library"><img src="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library/badges/gpa.svg" /></a>
 <a href="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library/coverage"><img src="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library/badges/coverage.svg" /></a>
 <a href="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library"><img src="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library/badges/issue_count.svg" /></a>
-![Build Status](https://travis-ci.org/andela-madegbola/checkpoint-one-music-library.svg?branch=master)](https://travis-ci.org/andela-madegbola/checkpoint-one-music-library)
+[![Build Status](https://travis-ci.org/andela-madegbola/checkpoint-one-music-library.svg?branch=master)](https://travis-ci.org/andela-madegbola/checkpoint-one-music-library)
 
 # Ruby Music Library
 
