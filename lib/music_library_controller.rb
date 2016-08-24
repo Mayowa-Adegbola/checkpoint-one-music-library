@@ -1,17 +1,15 @@
 class MusicLibraryController
+
   def initialize(path = "./db/mp3s")
     MusicImporter.new(path).import
   end
 
   def call
-    user_input = ""
-    add_borderline
-    puts "Welcome to Your Music Library!".colorize(:green)
-    add_borderline
-    while user_input != "exit"
-      display_help
-      print ">"
+    Info.greetings
+    loop do
+      Info.display_help
       user_input = gets.strip.downcase
+      break if user_input == "exit"
       process_input(user_input)
     end
   end
@@ -25,38 +23,28 @@ class MusicLibraryController
   end
 
   def artists
-    add_borderline
     puts "Artists in the Library".colorize(:blue)
-    add_borderline
     Artist.all.each do |i|
-      puts "#{i}"
+      puts "#{i.name}"
     end
-    add_borderline
   end
 
   def genres
-    add_borderline
     puts "Genres in the Library".colorize(:blue)
-    add_borderline
     Genre.all.each.with_index(1) do |g|
-      puts "#{g}"
+      puts "#{g.name}"
     end
-    add_borderline
   end
 
   def songs
-    add_borderline
     puts "Songs in the Library".colorize(:blue)
-    add_borderline
     Song.all.each.with_index(1) do |s, i|
       puts "#{i}. #{s}"
     end
-    add_borderline
   end
 
   def list_artist
     puts "What artist by name would you like to list songs for?".colorize(:blue)
-    print ">"
     artist_input = gets.strip
     artist = Artist.find_by_name(artist_input)
     list(artist)
@@ -64,16 +52,13 @@ class MusicLibraryController
 
   def list_genre
     puts "What genre by name would you like to list songs for?".colorize(:blue)
-    print ">"
     genre_input = gets.strip.downcase
     genre = Genre.find_by_name(genre_input)
     list(genre)
   end
 
-
   def play_song
     puts "What song number would you like to play?"
-    print ">"
     song_input = gets.strip.to_i
     if song_input > 0 && song_input <= Song.all.size
       puts "Playing #{Song.all[song_input.to_i-1]}"
@@ -82,10 +67,9 @@ class MusicLibraryController
     end
   end
 
-
   def list(category)
     if category
-      puts "#{category} Songs".capitalize
+      puts "#{category.name} Songs".capitalize
       category.songs.each do |s|
         puts "#{s}"
       end
@@ -102,25 +86,6 @@ class MusicLibraryController
       "play song" => :play_song,
       "list artist" => :list_artist,
       "list genre" => :list_genre,
-      "exit" => :exit
     }
-  end
-
-  def display_help
-    puts <<-HELP_MENU
-    Please Enter:
-    "list songs" to view all songs
-    "list artists" to view all artists
-    "list genres" to view songs\'s genres
-    "play song" to play a song
-    "list artist" to view a particular artist\'s song
-    "list genre" to view a particular genre\'s song
-    "exit" to leave the app
-    HELP_MENU
-  end
-
-  def add_borderline
-    puts "-".colorize(:red) * 70
-    puts "-".colorize(:red) * 70
   end
 end

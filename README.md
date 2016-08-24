@@ -1,10 +1,7 @@
 <a href="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library"><img src="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library/badges/gpa.svg" /></a>
-
 <a href="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library/coverage"><img src="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library/badges/coverage.svg" /></a>
-
 <a href="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library"><img src="https://codeclimate.com/github/andela-madegbola/checkpoint-one-music-library/badges/issue_count.svg" /></a>
-
-[![Build Status](https://travis-ci.org/andela-madegbola/checkpoint-one-music-library.svg?branch=master)](https://travis-ci.org/andela-madegbola/checkpoint-one-music-library)
+![Build Status](https://travis-ci.org/andela-madegbola/checkpoint-one-music-library.svg?branch=master)](https://travis-ci.org/andela-madegbola/checkpoint-one-music-library)
 
 # Ruby Music Library
 
@@ -62,3 +59,12 @@ You will require a basic understanding of "Git" and the "Command Line Interface"
 -> The help menu is displayed at startup.
    It shows you the relevant commands/actions you can perform in the application.
    Follow the interactive prompts
+
+### Testing
+
+To test the application based on the specifications, run 'bundle exec rspec' from the ruby-music-library directory after you   have installed all the dependencies i.e. using 'bundle install' as previously described.
+
+$  bundle exec rspec
+The application should pass all 70 test cases.
+
+
