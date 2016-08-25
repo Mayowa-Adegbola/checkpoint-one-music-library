@@ -1,5 +1,4 @@
 class Genre < Base
-
   @@all = []
 
   def artists

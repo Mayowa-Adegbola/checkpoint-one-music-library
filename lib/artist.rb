@@ -1,5 +1,4 @@
 class Artist < Base
-
   @@all = []
 
   def add_song(song)

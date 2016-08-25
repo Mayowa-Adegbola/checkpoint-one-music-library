@@ -62,9 +62,12 @@ You will require a basic understanding of "Git" and the "Command Line Interface"
 
 ### Testing
 
-To test the application based on the specifications, run 'bundle exec rspec' from the ruby-music-library directory after you   have installed all the dependencies i.e. using 'bundle install' as previously described.
+To test the application based on the specifications, run the command below from the ruby-music-library directory after you have installed all the dependencies.
 
-$  bundle exec rspec
+```
+$ bundle exec rspec
+```
+
 The application should pass all 70 test cases.
 
 
