@@ -1,5 +1,4 @@
 class Base
-
   include Concerns::InstanceMethods
   extend Concerns::ClassMethods
   extend Concerns::Findable

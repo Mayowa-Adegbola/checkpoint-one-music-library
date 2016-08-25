@@ -1,6 +1,5 @@
 module Concerns
   module InstanceMethods
-
     def save
       self.class.all << self
       self

@@ -1,6 +1,5 @@
 module Concerns
   module ClassMethods
-
     def all
       class_variable_get :@@all
     end

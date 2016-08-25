@@ -1,5 +1,4 @@
 class Song < Base
-
   attr_reader :artist, :genre
 
   @@all = []

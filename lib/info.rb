@@ -1,5 +1,4 @@
 class Info
-
   def self.display_help
     puts <<-HELP_MENU
     Please Enter:
@@ -19,6 +18,5 @@ class Info
     puts "Welcome to Your Music Library!".colorize(:green)
     puts "-".colorize(:red) * 70
     puts "-".colorize(:red) * 70
-
   end
 end
